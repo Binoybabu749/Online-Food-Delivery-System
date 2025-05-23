@@ -23,7 +23,7 @@ namespace Online_food_delivery_system.Controllers
         public async Task<IActionResult> GetAllOrders()
         {
             var orders = await _orderService.GetAllOrdersAsync();
-            
+
             return Ok(orders);
         }
 
@@ -51,7 +51,7 @@ namespace Online_food_delivery_system.Controllers
                 var item = await _menuItemService.GetMenuItemByIdAsync(itemId);
                 if (item == null)
                     return NotFound($"Menu item with ID {itemId} not found.");
-                if(item.RestaurantID != orderDto.RestaurantID)
+                if (item.RestaurantID != orderDto.RestaurantID)
                     return BadRequest($"Menu item with ID {itemId} does not belong to the specified restaurant.");
 
                 menuItems.Add(item);
@@ -95,34 +95,40 @@ namespace Online_food_delivery_system.Controllers
         {
             if (string.IsNullOrWhiteSpace(status))
                 return BadRequest("Status cannot be null or empty");
-            var order = await _orderService.GetOrderByIdAsync(id);
-            if (order == null)
-                return NotFound("Order not found");
-            order.Status = status;
-            if(status.ToLower() == "completed")
-            {
-                var delivery = order.Delivery;
-                if (delivery != null)
-                {
-                    var agent=delivery.Agent;
-                    if(agent!= null)
-                    {
-                       
-                        agent.IsAvailable= true;
-                        await _orderService.UpdateAgentAsync(agent);
-                    }
-                    else
-                    {
-                        return BadRequest("No agent is assigned to the delivery.");
-                    }
-                }
-                else
-                    {
-                        return BadRequest("No delivery is associated with the order.");
-                    }
-            }
-            await _orderService.UpdateOrderAsync(order);
-            return Ok("Order status updated successfully");
+
+            await _orderService.UpdateOrderStatusAsync(id, status);
+            return NoContent();
+            //    if (string.IsNullOrWhiteSpace(status))
+            //        return BadRequest("Status cannot be null or empty");
+            //    var order = await _orderService.GetOrderByIdAsync(id);
+            //    if (order == null)
+            //        return NotFound("Order not found");
+            //    order.Status = status;
+            //    if(status.ToLower() == "completed")
+            //    {
+            //        var delivery = order.Delivery;
+            //        if (delivery != null)
+            //        {
+            //            var agent=delivery.Agent;
+            //            if(agent!= null)
+            //            {
+
+            //                agent.IsAvailable= true;
+            //                await _orderService.UpdateAgentAsync(agent);
+            //            }
+            //            else
+            //            {
+            //                return BadRequest("No agent is assigned to the delivery.");
+            //            }
+            //        }
+            //        else
+            //            {
+            //                return BadRequest("No delivery is associated with the order.");
+            //            }
+            //    }
+            //    await _orderService.UpdateOrderAsync(order);
+            //    return Ok("Order status updated successfully");
+            //}
         }
     }
 }

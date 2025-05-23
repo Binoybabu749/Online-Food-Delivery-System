@@ -471,6 +471,29 @@
         }
       }
     },
+    "/api/Delivery/{orderId}/complete": {
+      "patch": {
+        "tags": [
+          "Delivery"
+        ],
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/MenuItem/search": {
       "get": {
         "tags": [
@@ -1226,7 +1249,7 @@
         }
       }
     },
-    "/api/Token": {
+    "/api/Token/login": {
       "post": {
         "tags": [
           "Token"
@@ -1235,22 +1258,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/LoginRequestDto"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/LoginRequestDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/LoginRequestDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/LoginRequestDto"
               }
             }
           }
@@ -1580,6 +1603,20 @@
           },
           "agent": {
             "$ref": "#/components/schemas/Agent"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginRequestDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

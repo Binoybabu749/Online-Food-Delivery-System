@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\2401697\\OneDrive - Cognizant\\Desktop\\p1\\Online-food-delivery-system\\Online food delivery system\\Online food delivery system.csproj": {}
+    "C:\\Users\\2401697\\OneDrive - Cognizant\\Desktop\\p2\\Online-food-delivery-system\\Online food delivery system\\Online food delivery system.csproj": {}
   },
   "projects": {
-    "C:\\Users\\2401697\\OneDrive - Cognizant\\Desktop\\p1\\Online-food-delivery-system\\Online food delivery system\\Online food delivery system.csproj": {
+    "C:\\Users\\2401697\\OneDrive - Cognizant\\Desktop\\p2\\Online-food-delivery-system\\Online food delivery system\\Online food delivery system.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\2401697\\OneDrive - Cognizant\\Desktop\\p1\\Online-food-delivery-system\\Online food delivery system\\Online food delivery system.csproj",
+        "projectUniqueName": "C:\\Users\\2401697\\OneDrive - Cognizant\\Desktop\\p2\\Online-food-delivery-system\\Online food delivery system\\Online food delivery system.csproj",
         "projectName": "Online food delivery system",
-        "projectPath": "C:\\Users\\2401697\\OneDrive - Cognizant\\Desktop\\p1\\Online-food-delivery-system\\Online food delivery system\\Online food delivery system.csproj",
+        "projectPath": "C:\\Users\\2401697\\OneDrive - Cognizant\\Desktop\\p2\\Online-food-delivery-system\\Online food delivery system\\Online food delivery system.csproj",
         "packagesPath": "C:\\Users\\2401697\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\2401697\\OneDrive - Cognizant\\Desktop\\p1\\Online-food-delivery-system\\Online food delivery system\\obj\\",
+        "outputPath": "C:\\Users\\2401697\\OneDrive - Cognizant\\Desktop\\p2\\Online-food-delivery-system\\Online food delivery system\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -53,6 +53,10 @@
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[8.0.14, )"
+            },
+            "Microsoft.AspNetCore.Cors": {
+              "target": "Package",
+              "version": "[2.3.0, )"
             },
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",

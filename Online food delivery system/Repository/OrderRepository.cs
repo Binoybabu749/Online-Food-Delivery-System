@@ -46,17 +46,7 @@ namespace Online_food_delivery_system.Repository
             await _context.Orders.AddAsync(order);
             await _context.SaveChangesAsync();
 
-            // Create the payment entry
-            Payment payment = new Payment
-            {
-                OrderID = order.OrderID,
-                Amount = order.TotalAmount,
-                PaymentMethod = "Google Pay", // or any default value
-                Status = "Pending" // or any default value
-            };
-
-            await _context.Payments.AddAsync(payment);
-            await _context.SaveChangesAsync();
+            //// Create the payment entry
             Delivery delivery = new Delivery
             {
                 OrderID = order.OrderID,
@@ -104,17 +94,43 @@ namespace Online_food_delivery_system.Repository
 
         public async Task UpdateAsync(Order order)
         {
+            // Get the existing order from the database
+            var existingOrder = await _context.Orders
+                .AsNoTracking()
+                .FirstOrDefaultAsync(o => o.OrderID == order.OrderID);
+
+            bool statusChangedToConfirmed = existingOrder != null &&
+                                            existingOrder.Status != "Confirmed" &&
+                                            order.Status == "Confirmed";
+
             // Update the order
             _context.Orders.Update(order);
             await _context.SaveChangesAsync();
 
-            // Update the payment entry
-            var payment = await _context.Payments.FirstOrDefaultAsync(p => p.OrderID == order.OrderID);
-            if (payment != null)
+            // If status changed to Confirmed, create a payment
+            if (statusChangedToConfirmed)
             {
-                payment.Amount = order.TotalAmount;
-                _context.Payments.Update(payment);
+                Payment payment = new Payment
+                {
+                    OrderID = order.OrderID,
+                    Amount = order.TotalAmount,
+                    PaymentMethod = "Google Pay", // or any default value
+                    Status = "Pending"
+                };
+
+                await _context.Payments.AddAsync(payment);
                 await _context.SaveChangesAsync();
+            }
+            else
+            {
+                // Optionally update payment if it already exists
+                var payment = await _context.Payments.FirstOrDefaultAsync(p => p.OrderID == order.OrderID);
+                if (payment != null)
+                {
+                    payment.Amount = order.TotalAmount;
+                    _context.Payments.Update(payment);
+                    await _context.SaveChangesAsync();
+                }
             }
         }
     }

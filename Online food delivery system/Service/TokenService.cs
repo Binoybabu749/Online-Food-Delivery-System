@@ -17,24 +17,27 @@ namespace Online_food_delivery_system.Service
 
         public string GenerateToken(User user)
         {
-            string token = string.Empty;
             var claims = new List<Claim>
-            {
-                new Claim(JwtRegisteredClaimNames.NameId,user.Username!),
-                 new Claim(JwtRegisteredClaimNames.Email,user.Email),
-                  new Claim(ClaimTypes.Role, user.Role),
-            };
-            var cred = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256);
-            var tokenDescription = new SecurityTokenDescriptor
+    {
+        new Claim(JwtRegisteredClaimNames.NameId, user.Username),
+        new Claim(JwtRegisteredClaimNames.Email, user.Email),
+        new Claim(ClaimTypes.Role, user.Role)
+    };
+
+            var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(2),
-                SigningCredentials = cred
+                Expires = DateTime.UtcNow.AddDays(2),
+                SigningCredentials = creds
             };
+
             var tokenHandler = new JwtSecurityTokenHandler();
-            var myToken = tokenHandler.CreateToken(tokenDescription);
-            token = tokenHandler.WriteToken(myToken);
-            return token;
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return tokenHandler.WriteToken(token);
         }
+
     }
 }

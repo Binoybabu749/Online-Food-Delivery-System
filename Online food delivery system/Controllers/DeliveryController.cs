@@ -49,6 +49,34 @@ namespace Online_food_delivery_system.Controllers
             await _deliveryService.UpdateDeliveryStatusAsync(id, status);
             return Ok("Delivery status updated successfully");
         }
+        [HttpPatch("{orderId}/complete")]
+        public async Task<IActionResult> CompleteDelivery(int orderId)
+        {
+            // Get the delivery by orderId
+            var delivery = (await _deliveryService.GetAllDeliveriesAsync())
+                .FirstOrDefault(d => d.OrderID == orderId);
+
+            if (delivery == null)
+                return NotFound("Delivery not found for the given order ID.");
+
+            // Update delivery status to Completed
+            delivery.Status = "Completed";
+            await _deliveryService.UpdateDeliveryStatusAsync(delivery.DeliveryID, "Completed");
+
+            // Set agent availability to true
+            if (delivery.Agent != null)
+            {
+                delivery.Agent.IsAvailable = true;
+                await _deliveryService.UpdateAgentAvailabilityAsync(delivery.Agent);
+            }
+            else
+            {
+                return BadRequest("No agent assigned to this delivery.");
+            }
+
+            return Ok("Delivery marked as completed and agent set to available.");
+        }
+
 
     }
 }

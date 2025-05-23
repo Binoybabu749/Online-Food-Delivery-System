@@ -216,6 +216,22 @@
   },
   {
     "ContainingType": "Online_food_delivery_system.Controllers.DeliveryController",
+    "Method": "CompleteDelivery",
+    "RelativePath": "api/Delivery/{orderId}/complete",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_food_delivery_system.Controllers.DeliveryController",
     "Method": "AssignDeliveryAgent",
     "RelativePath": "api/Delivery/assign",
     "HttpMethod": "POST",
@@ -694,15 +710,15 @@
   },
   {
     "ContainingType": "Online_food_delivery_system.Controllers.TokenController",
-    "Method": "Post",
-    "RelativePath": "api/Token",
+    "Method": "Login",
+    "RelativePath": "api/Token/login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "user",
-        "Type": "Online_food_delivery_system.Models.User",
+        "Name": "loginRequest",
+        "Type": "Online_food_delivery_system.Models.LoginRequestDto",
         "IsRequired": true
       }
     ],

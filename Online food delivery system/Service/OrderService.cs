@@ -24,8 +24,14 @@ public class OrderService
        await _orderRepository.AddAsync(order);
         return order;
     }
-  
 
+    public async Task UpdateOrderStatusAsync(int orderId, string status)
+    {
+        var order = await _orderRepository.GetByIdAsync(orderId);
+        if (order == null) throw new Exception("Order not found");
+        order.Status = status;
+        await _orderRepository.UpdateAsync(order);
+    }
 
     public async Task<Order> UpdateOrderAsync(Order order)
     {

@@ -76,6 +76,11 @@ namespace Online_food_delivery_system.Service
             // Save the updated delivery
             await _deliveryRepository.UpdateAsync(delivery);
         }
+        public async Task UpdateAgentAvailabilityAsync(Agent agent)
+        {
+            await _deliveryRepository.UpdateAgentAvailabilityAsync(agent);
+        }
+
 
 
 
