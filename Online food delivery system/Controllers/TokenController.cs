@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Online_food_delivery_system.Interface;
 using Online_food_delivery_system.Models;
@@ -8,6 +9,7 @@ namespace Online_food_delivery_system.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowReactApp")]
     public class TokenController : ControllerBase
     {
         private readonly FoodDbContext _context;
@@ -37,7 +39,9 @@ namespace Online_food_delivery_system.Controllers
             }
 
             var token = _tokenService.GenerateToken(user);
-            return Ok(new { token });
+            return Ok(new { token=token,
+             role = user.Role
+            });
         }
 
 }

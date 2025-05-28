@@ -21,12 +21,12 @@ namespace Online_food_delivery_system.Repository
                 .ToListAsync();
         }
 
-        public async Task<Restaurant> GetByIdAsync(int restaurantId)
+        public async Task<Restaurant> GetByIdAsync(string Email)
         {
             return await _context.Restaurants
                 .Include(r => r.MenuItems)
                 .Include(r => r.Orders)
-                .FirstOrDefaultAsync(r => r.RestaurantID == restaurantId);
+                .FirstOrDefaultAsync(r => r.Email == Email);
         }
 
         public async Task AddAsync(Restaurant restaurant)

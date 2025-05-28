@@ -23,7 +23,16 @@ namespace Online_food_delivery_system.Controllers
             var agents = await _agentService.GetAllAgentsAsync();
             return Ok(agents);
         }
+        [HttpGet("{email}")]
+        [Authorize(Roles = "customer,admin,agent")]
+        public async Task<IActionResult>GetAgentById(string email)
+        {
+            var agent = await _agentService.GetAgentByIdAsync(email);
+            if (agent == null)
+                return NotFound("Agent not found");
+            return Ok(agent);
 
+        }
         [HttpPost]
         [Authorize(Roles = "agent,admin")]
         public async Task<IActionResult> AddAgent([FromBody] AgentDTO agentDTO)
@@ -39,11 +48,11 @@ namespace Online_food_delivery_system.Controllers
             await _agentService.AddAgentAsync(agent);
             return CreatedAtAction(nameof(GetAllAgents), new { id = agent.AgentID }, agent);
         }
-        [HttpPatch("{id}")]
+        [HttpPatch("{email}")]
         [Authorize(Roles = "admin, agent")]
-        public async Task<IActionResult> UpdatePhoneAddr(int id, [FromBody] AgentcontactDTO upd)
+        public async Task<IActionResult> UpdatePhoneAddr(string email, [FromBody] AgentcontactDTO upd)
         {
-            var existing = await _agentService.GetAgentByIdAsync(id);
+            var existing = await _agentService.GetAgentByIdAsync(email);
             if (existing == null)
                 return NotFound("Customer not found");
             existing.AgentContact = upd.Phone;

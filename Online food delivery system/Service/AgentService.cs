@@ -17,9 +17,9 @@ namespace Online_food_delivery_system.Service
             return await _agentRepository.GetAllAsync();
         }
 
-        public async Task<Agent> GetAgentByIdAsync(int agentId)
+        public async Task<Agent> GetAgentByIdAsync(string email)
         {
-            return await _agentRepository.GetByIdAsync(agentId);
+            return await _agentRepository.GetByIdAsync(email);
         }
 
         public async Task AddAgentAsync(Agent agent)

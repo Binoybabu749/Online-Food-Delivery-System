@@ -30,7 +30,7 @@ namespace Online_food_delivery_system.Repository
         }
 
 
-        public async Task<Customer> GetByIdAsync(int customerId)
+        public async Task<Customer> GetByIdAsync(string Email)
         {
             return await _context.Customers
                 .Include(c => c.Orders) // Include related Orders
@@ -43,7 +43,7 @@ namespace Online_food_delivery_system.Repository
                 .Include(c => c.Orders)
                     .ThenInclude(o => o.OrderMenuItems) // Include OrderMenuItems in Orders
                         .ThenInclude(omi => omi.MenuItem) // Include MenuItem in OrderMenuItems
-                .FirstOrDefaultAsync(c => c.CustomerID == customerId);
+                .FirstOrDefaultAsync(c => c.Email == Email);
         }
 
 

@@ -31,7 +31,7 @@ namespace Online_food_delivery_system.Repository
                 .ToListAsync();
         }
 
-        public async Task<Agent> GetByIdAsync(int agentId)
+        public async Task<Agent> GetByIdAsync(string email)
         {
             return await _context.Agents
                 .Include(a => a.Deliveries) // Include related Deliveries
@@ -46,7 +46,7 @@ namespace Online_food_delivery_system.Repository
                 .Include(a => a.Deliveries)
                     .ThenInclude(d => d.Order)
                         .ThenInclude(o => o.OrderMenuItems) // Include OrderMenuItems in Order
-                .FirstOrDefaultAsync(a => a.AgentID == agentId);
+                .FirstOrDefaultAsync(a => a.Email== email);
         }
 
         public async Task AddAsync(Agent agent)

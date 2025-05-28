@@ -24,20 +24,20 @@ namespace Online_food_delivery_system.Controllers
             return Ok(customers);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{email}")]
         [Authorize(Roles = "customer,admin")]
-        public async Task<IActionResult> GetCustomerById(int id)
+        public async Task<IActionResult> GetCustomerById(string email)
         {
-            var customer = await _customerService.GetCustomerByIdAsync(id);
+            var customer = await _customerService.GetCustomerByIdAsync(email);
             if (customer == null)
                 return NotFound("Customer not found");
             return Ok(customer);
         }
-        [HttpPatch("{id}")]
+        [HttpPatch("{email}")]
         [Authorize(Roles = "admin, customer")]
-        public async Task<IActionResult> UpdatePhoneAddr(int id, [FromBody] UpdatePhoneAddrDTO upd)
+        public async Task<IActionResult> UpdatePhoneAddr(string email, [FromBody] UpdatePhoneAddrDTO upd)
         {
-            var existing = await _customerService.GetCustomerByIdAsync(id);
+            var existing = await _customerService.GetCustomerByIdAsync(email);
             if (existing == null)
                 return NotFound("Customer not found");
             existing.Phone = upd.Phone;

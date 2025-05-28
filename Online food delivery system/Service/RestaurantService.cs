@@ -17,9 +17,9 @@ namespace Online_food_delivery_system.Service
             return await _restaurantRepository.GetAllAsync();
         }
 
-        public async Task<Restaurant> GetRestaurantByIdAsync(int restaurantId)
+        public async Task<Restaurant> GetRestaurantByIdAsync(string email)
         {
-            return await _restaurantRepository.GetByIdAsync(restaurantId);
+            return await _restaurantRepository.GetByIdAsync(email);
         }
 
         public async Task AddRestaurantAsync(Restaurant restaurant)

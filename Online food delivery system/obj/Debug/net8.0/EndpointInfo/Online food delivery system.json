@@ -51,19 +51,38 @@
         }
       }
     },
-    "/api/Agent/{id}": {
+    "/api/Agent/{email}": {
+      "get": {
+        "tags": [
+          "Agent"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
       "patch": {
         "tags": [
           "Agent"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "email",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],
@@ -96,7 +115,9 @@
             "description": "OK"
           }
         }
-      },
+      }
+    },
+    "/api/Agent/{id}": {
       "put": {
         "tags": [
           "Agent"
@@ -210,19 +231,18 @@
         }
       }
     },
-    "/api/Customer/{id}": {
+    "/api/Customer/{email}": {
       "get": {
         "tags": [
           "Customer"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "email",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],
@@ -238,12 +258,11 @@
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "email",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],
@@ -276,7 +295,9 @@
             "description": "OK"
           }
         }
-      },
+      }
+    },
+    "/api/Customer/{id}": {
       "put": {
         "tags": [
           "Customer"
@@ -1115,19 +1136,18 @@
         }
       }
     },
-    "/api/Restaurant/{id}": {
+    "/api/Restaurant/{email}": {
       "get": {
         "tags": [
           "Restaurant"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "email",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],
@@ -1137,6 +1157,52 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "Restaurant"
+        ],
+        "parameters": [
+          {
+            "name": "Email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePhoneAddrDTO"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePhoneAddrDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePhoneAddrDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePhoneAddrDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Restaurant/{id}": {
       "put": {
         "tags": [
           "Restaurant"
@@ -1172,51 +1238,6 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/Restaurant"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Restaurant"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdatePhoneAddrDTO"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdatePhoneAddrDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdatePhoneAddrDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdatePhoneAddrDTO"
               }
             }
           }

@@ -24,11 +24,11 @@ namespace Online_food_delivery_system.Controllers
             return Ok(restaurants);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{email}")]
         [Authorize(Roles = "customer,resturant,admin")]
-        public async Task<IActionResult> GetRestaurantById(int id)
+        public async Task<IActionResult> GetRestaurantById(string email)
         {
-            var restaurant = await _restaurantService.GetRestaurantByIdAsync(id);
+            var restaurant = await _restaurantService.GetRestaurantByIdAsync(email);
             if (restaurant == null)
                 return NotFound("Restaurant not found");
             return Ok(restaurant);
@@ -66,11 +66,11 @@ namespace Online_food_delivery_system.Controllers
             await _restaurantService.UpdateRestaurantAsync(restaurant);
             return NoContent();
         }
-        [HttpPatch("{id}")]
+        [HttpPatch("{email}")]
         [Authorize(Roles = "admin, restaurant")]
-        public async Task<IActionResult> UpdatePhoneAddr(int id, [FromBody] UpdatePhoneAddrDTO upd)
+        public async Task<IActionResult> UpdatePhoneAddr(string Email, [FromBody] UpdatePhoneAddrDTO upd)
         {
-            var existing = await _restaurantService.GetRestaurantByIdAsync(id);
+            var existing = await _restaurantService.GetRestaurantByIdAsync(Email);
             if (existing == null)
                 return NotFound("Customer not found");
             existing.RestaurantContact = upd.Phone;

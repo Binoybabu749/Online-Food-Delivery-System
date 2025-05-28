@@ -27,15 +27,31 @@
   },
   {
     "ContainingType": "Online_food_delivery_system.Controllers.AgentController",
+    "Method": "GetAgentById",
+    "RelativePath": "api/Agent/{email}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_food_delivery_system.Controllers.AgentController",
     "Method": "UpdatePhoneAddr",
-    "RelativePath": "api/Agent/{id}",
+    "RelativePath": "api/Agent/{email}",
     "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
+        "Name": "email",
+        "Type": "System.String",
         "IsRequired": true
       },
       {
@@ -112,14 +128,14 @@
   {
     "ContainingType": "Online_food_delivery_system.Controllers.CustomerController",
     "Method": "GetCustomerById",
-    "RelativePath": "api/Customer/{id}",
+    "RelativePath": "api/Customer/{email}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
+        "Name": "email",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
@@ -128,14 +144,14 @@
   {
     "ContainingType": "Online_food_delivery_system.Controllers.CustomerController",
     "Method": "UpdatePhoneAddr",
-    "RelativePath": "api/Customer/{id}",
+    "RelativePath": "api/Customer/{email}",
     "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
+        "Name": "email",
+        "Type": "System.String",
         "IsRequired": true
       },
       {
@@ -637,14 +653,35 @@
   {
     "ContainingType": "Online_food_delivery_system.Controllers.RestaurantController",
     "Method": "GetRestaurantById",
-    "RelativePath": "api/Restaurant/{id}",
+    "RelativePath": "api/Restaurant/{email}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Online_food_delivery_system.Controllers.RestaurantController",
+    "Method": "UpdatePhoneAddr",
+    "RelativePath": "api/Restaurant/{email}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "upd",
+        "Type": "Online_food_delivery_system.Models.UpdatePhoneAddrDTO",
         "IsRequired": true
       }
     ],
@@ -666,27 +703,6 @@
       {
         "Name": "restaurant",
         "Type": "Online_food_delivery_system.Models.Restaurant",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Online_food_delivery_system.Controllers.RestaurantController",
-    "Method": "UpdatePhoneAddr",
-    "RelativePath": "api/Restaurant/{id}",
-    "HttpMethod": "PATCH",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "upd",
-        "Type": "Online_food_delivery_system.Models.UpdatePhoneAddrDTO",
         "IsRequired": true
       }
     ],

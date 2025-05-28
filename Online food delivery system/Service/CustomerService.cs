@@ -17,9 +17,9 @@ namespace Online_food_delivery_system.Service
             return await _customerRepository.GetAllAsync();
         }
 
-        public async Task<Customer> GetCustomerByIdAsync(int customerId)
+        public async Task<Customer> GetCustomerByIdAsync(string email)
         {
-            return await _customerRepository.GetByIdAsync(customerId);
+            return await _customerRepository.GetByIdAsync(email);
         }
 
         public async Task AddCustomerAsync(Customer customer)
